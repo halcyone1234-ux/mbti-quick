@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>MBTI 快速自測｜40 題</title>
+<meta name="description" content="人力資源管理課堂用：40 題、約 5 分鐘，快速知道自己可能偏向哪一型 MBTI。簡化版自我評估，非正式測驗。">
+<meta name="theme-color" content="#f6f4ee">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&display=swap">
+<style>
+:root{
+  --bg:#f6f4ee; --panel:#ffffff; --fg:#1d2a2a; --muted:#5f6b69; --line:#dcd9ce;
+  --accent:#0f6b5c; --accent-ink:#ffffff; --accent-soft:#dff0ea;
+  --a:#2d6bd1; --b:#d9792b; --warn:#b4541a; --gold:#c9a227;
+  --display:"Bricolage Grotesque","Noto Sans TC",system-ui,sans-serif;
+  --body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --shadow:0 1px 2px rgba(29,42,42,.06),0 8px 24px rgba(29,42,42,.08);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#161a19; --panel:#1f2524; --fg:#eef1ee; --muted:#9aa6a2; --line:#34403d;
+  --accent:#4fc3a6; --accent-ink:#0d1a16; --accent-soft:#213a34; --a:#6fa2ff; --b:#f0a05a; --warn:#f29b5e; --gold:#e3c45a;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35); color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#161a19; --panel:#1f2524; --fg:#eef1ee; --muted:#9aa6a2; --line:#34403d;
+  --accent:#4fc3a6; --accent-ink:#0d1a16; --accent-soft:#213a34; --a:#6fa2ff; --b:#f0a05a; --warn:#f29b5e; --gold:#e3c45a;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35); color-scheme:dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(1.9rem,6vw,2.8rem);font-weight:800}
+h2{font-size:1.35rem;font-weight:800}
+p{margin:0}
+.muted{color:var(--muted)}
+.eyebrow{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+button{font:inherit;cursor:pointer;border:0;border-radius:999px;padding:.75rem 1.4rem;background:var(--accent);color:var(--accent-ink);font-weight:700;transition:transform .1s,opacity .2s;min-height:44px}
+button:active{transform:scale(.97)}
+button.ghost{background:transparent;color:var(--fg);border:1.5px solid var(--line)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.wrap{max-width:720px;margin:0 auto;padding:20px 16px 60px;display:grid;gap:18px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.85rem}
+.top b{font-family:var(--display)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);display:grid;gap:14px}
+.rules{display:grid;gap:8px}
+.rule{display:flex;gap:10px;align-items:flex-start;font-size:.95rem}
+.rule b{flex:0 0 26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:.8rem}
+.notice{border-left:3px solid var(--warn);padding:8px 12px;background:var(--accent-soft);border-radius:0 10px 10px 0;font-size:.9rem}
+
+/* 作答 */
+.progress{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.progress span{display:block;height:100%;background:var(--accent);transition:width .3s ease}
+.qnum{font-family:var(--display);color:var(--accent);font-weight:800}
+.qtext{font-size:clamp(1.15rem,3.6vw,1.45rem);font-weight:700;line-height:1.45;min-height:3.2em}
+.scale{display:grid;gap:8px}
+.scale button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--panel);color:var(--fg);border:1.5px solid var(--line);border-radius:14px;padding:.8rem 1rem;font-weight:500}
+.scale button i{flex:0 0 14px;height:14px;border-radius:50%;border:2px solid var(--line);font-style:normal}
+.scale button.on{border-color:var(--accent);background:var(--accent-soft)}
+.scale button.on i{background:var(--accent);border-color:var(--accent)}
+.scale button[data-v="2"] i{transform:scale(1.25)} .scale button[data-v="-2"] i{transform:scale(1.25)}
+.scale button[data-v="0"] i{transform:scale(.8)}
+.navrow{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.quick{font-size:.8rem;color:var(--muted)}
+
+/* 結果 */
+.type{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.type .code{font-family:var(--display);font-size:clamp(3rem,14vw,5.2rem);font-weight:800;letter-spacing:.04em;line-height:1}
+.type .code b{color:var(--accent)}
+.type .nick{font-size:1.2rem;font-weight:700}
+.dims{display:grid;gap:14px}
+.dim{display:grid;gap:6px}
+.dim-head{display:flex;justify-content:space-between;font-size:.9rem;font-weight:700}
+.dim-head span{display:flex;gap:6px;align-items:center}
+.bar{position:relative;height:16px;border-radius:999px;background:linear-gradient(90deg,var(--a),var(--b));opacity:.9}
+.bar i{position:absolute;top:-6px;width:28px;height:28px;border-radius:50%;background:var(--panel);border:3px solid var(--fg);transform:translateX(-50%);box-shadow:var(--shadow)}
+.bar .mid{position:absolute;left:50%;top:-3px;width:2px;height:22px;background:var(--panel);opacity:.8}
+.dim-foot{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.75rem;padding:2px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:700}
+.tag.edge{background:#fde3c8;color:var(--warn)}
+:root[data-theme="dark"] .tag.edge{background:#45301f}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tag.edge{background:#45301f} }
+.kw{display:flex;flex-wrap:wrap;gap:6px}
+.kw span{border:1.5px solid var(--line);border-radius:999px;padding:3px 10px;font-size:.85rem}
+.desc{font-size:1rem}
+.twolist{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.twolist>div{display:grid;gap:4px;font-size:.9rem}
+.twolist b{font-size:.8rem;color:var(--muted);letter-spacing:.08em}
+@media (max-width:480px){.twolist{grid-template-columns:1fr}}
+.foot{font-size:.8rem;color:var(--muted);text-align:center}
+.foot a{color:var(--accent)}
+.fade{animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <span><b>MBTI 快速自測</b> <span class="muted">｜人力資源管理</span></span>
+    <span class="muted" id="topRight">40 題・約 5 分鐘</span>
+  </div>
+
+  <!-- 0 intro -->
+  <section id="s0" class="card fade">
+    <div class="eyebrow">中興大學 生管所 ｜ 1151 學期 ｜ 人力資源管理</div>
+    <h1>5 分鐘，先知道自己<br>可能是哪一型。</h1>
+    <p class="muted">40 題、四個向度各 10 題。沒做過 MBTI 的同學先用這個抓個方向，上課才有東西可以對照、可以討論。</p>
+    <div class="rules">
+      <div class="rule"><b>1</b>每題憑第一直覺作答，不要想「應該」怎樣，想「平常」怎樣。</div>
+      <div class="rule"><b>2</b>點選項後自動跳下一題；想改答案按「上一題」。</div>
+      <div class="rule"><b>3</b>結果會顯示四個向度的「位置」，不只四個字母。靠近中間的向度代表你兩邊都有，別急著貼標籤。</div>
+    </div>
+    <div class="notice">這是為課堂設計的簡化版自我評估，不是正式 MBTI® 測驗。它給你一個描述自己偏好的語言，不能預測你會不會成功。</div>
+    <div class="navrow"><button id="start">開始作答</button><button class="ghost" id="resume" hidden>繼續上次的作答</button></div>
+  </section>
+
+  <!-- 1 quiz -->
+  <section id="s1" hidden>
+    <div class="card fade" id="qcard">
+      <div class="progress"><span id="bar" style="width:0%"></span></div>
+      <div class="qnum" id="qnum">Q1 / 40</div>
+      <div class="qtext" id="qtext"></div>
+      <div class="scale" id="scale"></div>
+      <div class="navrow"><button class="ghost" id="prev">← 上一題</button><span class="quick" id="hint">點選後自動跳下一題</span></div>
+    </div>
+  </section>
+
+  <!-- 2 result -->
+  <section id="s2" hidden>
+    <div class="card fade" id="rcard"></div>
+    <div class="card fade" id="rnote">
+      <h2>怎麼讀這個結果</h2>
+      <p class="desc">每個向度都是一條連續的尺，MBTI 把它砍成兩邊。你在 51% 和 49% 的位置被分到不同字母，但其實幾乎一樣。所以看結果時，先看「你在尺上的哪裡」，再看字母。靠近中間的向度，下次再測很可能會換邊，這是測量工具的性質，不是你善變。</p>
+      <p class="desc">MBTI 能給你一個描述自己偏好的語言，面試時有東西可以講；它不能預測你會不會成功、適不適合某個工作。性格與收入的相關，不代表因果。</p>
+      <div class="navrow"><button id="copy">複製結果</button><button class="ghost" id="again">重新作答</button></div>
+    </div>
+  </section>
+
+  <p class="foot">本測驗題目由授課教師為課堂編寫，穿插反向題以降低「一路勾到底」的偏誤。MBTI® 為 The Myers-Briggs Company 之商標，本站與其無關。</p>
+</div>
+
+<script>
+(function(){
+'use strict';
+/* 題目：d＝向度（EI/SN/TF/JP），k＝同意時偏向哪個字母 */
+var Q=[
+ {d:'EI',k:'E',t:'聚會結束後，我通常覺得更有精神，而不是被掏空。'},
+ {d:'SN',k:'S',t:'我比較相信親身經驗，而不是理論推測。'},
+ {d:'TF',k:'T',t:'做決定時，我先看邏輯與利弊，再考慮感受。'},
+ {d:'JP',k:'J',t:'我喜歡事先規劃，然後照計畫走。'},
+ {d:'EI',k:'E',t:'遇到問題時，我喜歡找人聊聊，邊講邊想。'},
+ {d:'SN',k:'N',t:'我常常想到「如果……會怎樣」的各種可能性。'},
+ {d:'TF',k:'F',t:'朋友跟我訴苦時，我的第一個反應是安慰，而不是給解法。'},
+ {d:'JP',k:'P',t:'截止日前一刻，我的效率最高。'},
+ {d:'EI',k:'I',t:'我比較喜歡一個人安靜地完成工作。'},
+ {d:'SN',k:'S',t:'說明一件事，我會先講細節和步驟。'},
+ {d:'TF',k:'T',t:'我可以接受為了做對的事而讓人不開心。'},
+ {d:'JP',k:'J',t:'待辦事項沒完成，我會一直掛在心上。'},
+ {d:'EI',k:'E',t:'在新環境裡，我會主動認識陌生人。'},
+ {d:'SN',k:'N',t:'我喜歡討論概念與未來，勝過討論眼前的實際做法。'},
+ {d:'TF',k:'F',t:'我很在意團隊裡大家的氣氛是否和諧。'},
+ {d:'JP',k:'P',t:'我喜歡保留彈性，臨時改計畫也沒關係。'},
+ {d:'EI',k:'I',t:'打電話之前，我常常需要先在心裡演練一遍。'},
+ {d:'SN',k:'N',t:'看一篇文章，我更在意字裡行間的含意，而不是字面內容。'},
+ {d:'TF',k:'T',t:'別人說我講話很直接，有時太直。'},
+ {d:'JP',k:'J',t:'我的桌面與檔案通常整理得有條理。'},
+ {d:'EI',k:'I',t:'跟一群人相處久了，我會想找個角落休息一下。'},
+ {d:'SN',k:'S',t:'我做事喜歡照既有的方法，少改動。'},
+ {d:'TF',k:'F',t:'評估一件事，我會先問「這對相關的人有什麼影響」。'},
+ {d:'JP',k:'P',t:'做決定前，我傾向多蒐集一點資訊，晚一點再定案。'},
+ {d:'EI',k:'E',t:'一整天沒跟人說話，我會覺得悶。'},
+ {d:'SN',k:'N',t:'我常被說「想太多」或「太抽象」。'},
+ {d:'TF',k:'T',t:'我覺得公平比體貼更重要。'},
+ {d:'JP',k:'J',t:'旅行時我會先把行程排好。'},
+ {d:'EI',k:'I',t:'我需要獨處的時間來恢復能量。'},
+ {d:'SN',k:'S',t:'我會注意到環境裡細微的變化，例如有人換了髮型。'},
+ {d:'TF',k:'F',t:'我容易被別人的情緒影響。'},
+ {d:'JP',k:'P',t:'規則太多會讓我覺得被綁住。'},
+ {d:'EI',k:'E',t:'在小組討論裡，我通常是先開口的那個。'},
+ {d:'SN',k:'N',t:'我喜歡發明新的做法，即使舊方法還能用。'},
+ {d:'TF',k:'T',t:'爭論時，我重視誰的論點站得住腳，而不是誰比較委屈。'},
+ {d:'JP',k:'J',t:'我喜歡把事情做完的感覺，勝過開始新事情的感覺。'},
+ {d:'EI',k:'I',t:'比起當眾發言，我更擅長用文字表達。'},
+ {d:'SN',k:'S',t:'我偏好具體、可以馬上用的知識。'},
+ {d:'TF',k:'F',t:'我會為了不傷和氣而不說出真正的想法。'},
+ {d:'JP',k:'P',t:'我常同時進行好幾件事，哪個有興趣就先做。'}
+];
+var SCALE=[[2,'非常同意'],[1,'有點同意'],[0,'都可以／看情況'],[-1,'有點不同意'],[-2,'非常不同意']];
+var DIMS=[
+ {d:'EI',a:'E',b:'I',an:'外向 Extraversion',bn:'內向 Introversion',q:'能量從哪裡來'},
+ {d:'SN',a:'S',b:'N',an:'實感 Sensing',bn:'直覺 Intuition',q:'怎麼接收資訊'},
+ {d:'TF',a:'T',b:'F',an:'思考 Thinking',bn:'情感 Feeling',q:'怎麼做決定'},
+ {d:'JP',a:'J',b:'P',an:'判斷 Judging',bn:'感知 Perceiving',q:'怎麼安排生活'}
+];
+var TYPES={
+ ISTJ:{n:'務實的執行者',k:['可靠','有條理','重承諾'],s:'把事情做對、做完，是你最自然的狀態。你相信制度與經驗，討厭空談。',w:'流程、品管、財務、行政、法務'},
+ ISFJ:{n:'安靜的守護者',k:['體貼','細心','有責任感'],s:'你記得別人的需要，默默把事情照顧好；穩定與和諧對你很重要。',w:'人資、護理、客服、教育、行政支援'},
+ INFJ:{n:'有信念的引導者',k:['洞察','理想','深度'],s:'你在意事情背後的意義，喜歡少數深交的人，常能看見別人沒說出口的東西。',w:'諮商、企劃、寫作、非營利、教育'},
+ INTJ:{n:'策略的建築師',k:['獨立','長遠','系統'],s:'你喜歡先想清楚整個架構再動手，對沒效率的事情耐心有限。',w:'策略、研究、資料分析、產品、工程'},
+ ISTP:{n:'冷靜的修理工',k:['動手','理性','隨機應變'],s:'你透過拆解與實作理解世界，遇到突發狀況反而冷靜。',w:'技術、工程、維修、資安、現場作業'},
+ ISFP:{n:'溫和的創作者',k:['美感','真誠','低調'],s:'你用行動和作品表達自己，不喜歡被規則綁住，也不愛搶鋒頭。',w:'設計、餐飲、攝影、照護、手作品牌'},
+ INFP:{n:'理想的調停者',k:['價值','想像','同理'],s:'你有一套自己的價值觀，做事要「對得起自己」；文字與創作常是你的出口。',w:'文案、編輯、社工、品牌、藝術'},
+ INTP:{n:'好奇的分析家',k:['邏輯','探索','原創'],s:'你享受把問題想透的過程，對概念比對人際更有興趣。',w:'研究、軟體、數據、學術、顧問'},
+ ESTP:{n:'敢衝的行動派',k:['果斷','務實','臨場'],s:'你喜歡現場、喜歡馬上有結果，談判與危機處理是你的舞台。',w:'業務、創業、行銷活動、營運、運動'},
+ ESFP:{n:'現場的表演者',k:['熱情','靈活','感染力'],s:'你讓場子熱起來，喜歡跟人在一起，也擅長察言觀色。',w:'公關、活動、零售、餐旅、媒體'},
+ ENFP:{n:'熱情的點子王',k:['創意','連結','可能性'],s:'你對新想法與新朋友都充滿興趣，擅長把人串起來，但收尾需要刻意練習。',w:'行銷、創業、社群、教育、傳播'},
+ ENTP:{n:'愛辯的發明家',k:['機智','挑戰','多工'],s:'你喜歡用辯論把想法磨利，討厭重複；常同時有好幾個計畫在跑。',w:'創業、產品、顧問、新事業開發、媒體'},
+ ESTJ:{n:'果斷的管理者',k:['效率','規矩','負責'],s:'你擅長把人和資源組織起來把事做成，對標準與期限很堅持。',w:'管理、營運、專案、供應鏈、公部門'},
+ ESFJ:{n:'熱心的協調者',k:['合群','照顧','可靠'],s:'你在意大家好不好，擅長經營關係與維持團隊運作。',w:'人資、客戶關係、教育、醫療行政、活動'},
+ ENFJ:{n:'鼓舞人的領導者',k:['同理','表達','影響力'],s:'你能看見別人的潛力並推他一把，天生會帶人、會講。',w:'教學、培訓、人資發展、領導、公益'},
+ ENTJ:{n:'天生的指揮官',k:['目標','決斷','企圖心'],s:'你看得到大局也敢做決定，習慣把目標講清楚然後推動所有人。',w:'經營管理、策略、創投、業務領導、法務'}
+};
+var KEY='mbti40.answers';
+var ans=[]; var cur=0;
+try{ var saved=JSON.parse(localStorage.getItem(KEY)||'null'); if(saved&&saved.length===Q.length){ ans=saved; } }catch(e){}
+var $=function(id){return document.getElementById(id)};
+var answeredCount=function(){ var n=0; for(var i=0;i<Q.length;i++) if(ans[i]!==undefined&&ans[i]!==null) n++; return n; };
+if(answeredCount()>0 && answeredCount()<Q.length) $('resume').hidden=false;
+if(answeredCount()===Q.length) { $('resume').hidden=false; $('resume').textContent='看上次的結果'; }
+
+function show(id){ ['s0','s1','s2'].forEach(function(s){ $(s).hidden=(s!==id); }); window.scrollTo(0,0); }
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(ans)); }catch(e){} }
+
+function renderQ(){
+  var q=Q[cur];
+  $('bar').style.width=Math.round(answeredCount()/Q.length*100)+'%';
+  $('qnum').textContent='Q'+(cur+1)+' / '+Q.length;
+  $('qtext').textContent=q.t;
+  $('topRight').textContent='已答 '+answeredCount()+' / '+Q.length;
+  var sc=$('scale'); sc.innerHTML='';
+  SCALE.forEach(function(s){
+    var b=document.createElement('button'); b.type='button'; b.setAttribute('data-v',s[0]);
+    b.innerHTML='<i></i>'+s[1];
+    if(ans[cur]===s[0]) b.classList.add('on');
+    b.addEventListener('click',function(){ pick(s[0]); });
+    sc.appendChild(b);
+  });
+  $('prev').disabled=cur===0;
+  var card=$('qcard'); card.classList.remove('fade'); void card.offsetWidth; card.classList.add('fade');
+}
+function pick(v){
+  ans[cur]=v; save();
+  var sc=$('scale'); Array.prototype.forEach.call(sc.children,function(b){ b.classList.toggle('on',Number(b.getAttribute('data-v'))===v); });
+  setTimeout(function(){
+    if(cur<Q.length-1){ cur++; renderQ(); }
+    else { var first=-1; for(var i=0;i<Q.length;i++){ if(ans[i]===undefined||ans[i]===null){ first=i; break; } }
+      if(first>=0){ cur=first; renderQ(); } else renderResult(); }
+  },180);
+}
+$('prev').addEventListener('click',function(){ if(cur>0){ cur--; renderQ(); } });
+$('start').addEventListener('click',function(){ ans=[]; save(); cur=0; show('s1'); renderQ(); });
+$('resume').addEventListener('click',function(){
+  if(answeredCount()===Q.length){ renderResult(); return; }
+  cur=0; for(var i=0;i<Q.length;i++){ if(ans[i]===undefined||ans[i]===null){ cur=i; break; } }
+  show('s1'); renderQ();
+});
+$('again').addEventListener('click',function(){ ans=[]; save(); cur=0; show('s1'); renderQ(); });
+
+function score(){
+  var out={}; DIMS.forEach(function(D){ out[D.d]=0; });
+  Q.forEach(function(q,i){ var v=ans[i]||0; var toA=(q.k===q.d[0])?v:-v; out[q.d]+=toA; });
+  var r={code:'',dims:[]};
+  DIMS.forEach(function(D){
+    var s=out[D.d]; var max=10*2; var pctA=Math.round((s+max)/(2*max)*100);
+    var letter=s>=0?D.a:D.b; var edge=Math.abs(s)<=3;
+    r.code+=letter; r.dims.push({D:D,s:s,pctA:pctA,letter:letter,edge:edge,strength:Math.abs(pctA-50)*2});
+  });
+  return r;
+}
+var lastResult=null;
+function renderResult(){
+  var r=score(); lastResult=r; var T=TYPES[r.code];
+  var edges=r.dims.filter(function(x){return x.edge;});
+  var html='';
+  html+='<div class="eyebrow">你的結果</div>';
+  html+='<div class="type"><div class="code">'+r.code.split('').map(function(c,i){ return r.dims[i].edge?'<b>'+c+'</b>':c; }).join('')+'</div><div class="nick">'+T.n+'</div></div>';
+  if(edges.length) html+='<p class="muted">綠色字母是靠近中間的向度（'+edges.map(function(x){return x.D.a+'/'+x.D.b;}).join('、')+'）：你兩邊都有，再測一次可能會換邊。</p>';
+  html+='<div class="dims">';
+  r.dims.forEach(function(x){
+    html+='<div class="dim"><div class="dim-head"><span>'+x.D.q+(x.edge?' <span class="tag edge">門檻附近</span>':' <span class="tag">偏 '+x.letter+' '+x.strength+'%</span>')+'</span></div>'
+      +'<div class="bar"><span class="mid"></span><i style="left:'+(100-x.pctA)+'%"></i></div>'
+      +'<div class="dim-foot"><span>'+x.D.an+' '+x.pctA+'%</span><span>'+x.D.bn+' '+(100-x.pctA)+'%</span></div></div>';
+  });
+  html+='</div>';
+  html+='<p class="desc">'+T.s+'</p>';
+  html+='<div class="twolist"><div><b>關鍵字</b><div class="kw">'+T.k.map(function(k){return '<span>'+k+'</span>';}).join('')+'</div></div><div><b>常見的方向（參考）</b><span>'+T.w+'</span></div></div>';
+  $('rcard').innerHTML=html;
+  $('topRight').textContent='完成';
+  show('s2');
+}
+$('copy').addEventListener('click',function(){
+  if(!lastResult) return;
+  var T=TYPES[lastResult.code];
+  var txt='MBTI 快速自測：'+lastResult.code+'（'+T.n+'）\n'+lastResult.dims.map(function(x){ return x.D.a+' '+x.pctA+'% / '+x.D.b+' '+(100-x.pctA)+'%'+(x.edge?'（門檻附近）':''); }).join('\n');
+  var done=function(){ $('copy').textContent='已複製 ✓'; setTimeout(function(){ $('copy').textContent='複製結果'; },1500); };
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done,function(){ prompt('複製這段文字：',txt); });
+  else prompt('複製這段文字：',txt);
+});
+})();
+</script>
+</body>
+</html>
